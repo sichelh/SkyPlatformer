@@ -5,9 +5,10 @@ using UnityEngine;
 public class DamagableObstacle : MonoBehaviour
 {
     private PlayerData playerData;
-    [SerializeField] private LayerMask layerMask;
 
     private Coroutine damageCoroutine;
+
+    [SerializeField] private float damage = 10f;
 
     // 데미지 주는 오브젝트와 충돌하면 지속 데미지
     private void OnTriggerEnter(Collider other)
@@ -39,7 +40,7 @@ public class DamagableObstacle : MonoBehaviour
     {
         while (playerData.CurHp > 0)
         {
-            playerData.TakeDamage(10);
+            playerData.TakeDamage(damage);
             yield return new WaitForSeconds(3);
         }
     }

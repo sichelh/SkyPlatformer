@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerData : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class PlayerData : MonoBehaviour
         CurHp += heal;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         CurHp -= damage;
         OnTakeDamage?.Invoke();
@@ -81,8 +82,9 @@ public class PlayerData : MonoBehaviour
         runSpeed -= boostSpeedPower;
     }
 
+    // 사망 시 게임 다시 시작
     public void Death()
     {
-        Debug.Log("사망");
+        SceneManager.LoadScene("MainScene");
     }
 }
