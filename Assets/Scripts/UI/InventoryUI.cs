@@ -93,25 +93,25 @@ public class InventoryUI : MonoBehaviour
                 player.itemData = null;
                 return;
             }
-
-            // 빈 슬롯 찾기
-            ItemSlot emptySlot = GetEmptySlot();
-
-            // 빈 슬롯이 null이 아니면 인벤토리에 아이템 추가
-            if (emptySlot != null)
-            {
-                emptySlot.item = data;
-                emptySlot.quantity = 1;
-                UpdateUI();
-                player.itemData = null;
-                return;
-            }
-
-            // 빈 슬롯이 없으면 아이템 버리기
-            ThrowItem(data);
-
-            player.itemData = data;
         }
+
+        // 빈 슬롯 찾기
+        ItemSlot emptySlot = GetEmptySlot();
+
+        // 빈 슬롯이 null이 아니면 인벤토리에 아이템 추가
+        if (emptySlot != null)
+        {
+            emptySlot.item = data;
+            emptySlot.quantity = 1;
+            UpdateUI();
+            player.itemData = null;
+            return;
+        }
+
+        // 빈 슬롯이 없으면 아이템 버리기
+        ThrowItem(data);
+
+        player.itemData = data;
     }
 
     // itemSlot이 null이 아니면 Set, null이면 Celar
@@ -180,6 +180,12 @@ public class InventoryUI : MonoBehaviour
         {
             selectedItemStatName.text = selectedItemData.consumables[i].type.ToString() + "\n";
             selectedItemStatValue.text = selectedItemData.consumables[i].value.ToString() + "\n";
+        }
+
+        for (int i = 0; i < selectedItemData.equipables.Length; i++)
+        {
+            selectedItemStatName.text = selectedItemData.equipables[i].equipStatType.ToString() + "\n";
+            selectedItemStatValue.text = selectedItemData.equipables[i].value.ToString() + "\n";
         }
 
         useButton.SetActive(selectedItemData.type == EItemType.Consumable);

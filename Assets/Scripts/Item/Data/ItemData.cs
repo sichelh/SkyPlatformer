@@ -14,13 +14,26 @@ public enum ConsumableType
     Hp,
     Stamina,
     RunSpeed,
-    JumpPower,
+    JumpPower
+}
+
+public enum EquipStatType
+{
+    RunSpeed,
+    JumpPower
 }
 
 [Serializable]
 public class ItemDataConsumable
 {
     public ConsumableType type;
+    public int value;
+}
+
+[Serializable]
+public class ItemDataEquipable
+{
+    public EquipStatType equipStatType;
     public int value;
 }
 
@@ -43,4 +56,5 @@ public class ItemData : ScriptableObject
 
     [Header("Equipable")]
     public GameObject equipPrefab;
+    public ItemDataEquipable[] equipables;
 }
