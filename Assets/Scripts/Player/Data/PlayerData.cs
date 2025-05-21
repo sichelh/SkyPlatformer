@@ -60,7 +60,7 @@ public class PlayerData : MonoBehaviour
         StartCoroutine(JumpBoostRoutine(value));
     }
 
-    // 30초동안만 효과 지속
+    // 10초동안만 효과 지속
     IEnumerator JumpBoostRoutine(int boostJumpPower)
     {
         JumpPower += boostJumpPower;
@@ -73,7 +73,7 @@ public class PlayerData : MonoBehaviour
         StartCoroutine(SpeedBoostRoutine(value));
     }
 
-    // 30초동안만 효과 지속
+    // 10초동안만 효과 지속
     IEnumerator SpeedBoostRoutine(int boostSpeedPower)
     {
         runSpeed += boostSpeedPower;

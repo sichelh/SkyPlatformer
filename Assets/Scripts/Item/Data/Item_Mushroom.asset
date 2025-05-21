@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Item_Mushroom
   m_EditorClassIdentifier: 
   itemName: "\uBC84\uC12F"
-  itemDescription: "\uC0AC\uC6A9 \uC2DC \uC810\uD504\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  itemDescription: "\uC0AC\uC6A9 \uC2DC \uC810\uD504\uB825\uC774 10\uCD08 \uB3D9\uC548
+    \uC99D\uAC00\uD569\uB2C8\uB2E4."
   type: 0
   icon: {fileID: 21300000, guid: 8a08feb8c9e68ab40be862267016d3aa, type: 3}
   dropPrefab: {fileID: 576349180750663689, guid: e1b035d18e2d1aa4991ac31bd5291ba1, type: 3}

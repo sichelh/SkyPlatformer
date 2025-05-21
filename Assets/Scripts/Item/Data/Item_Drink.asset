@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Item_Drink
   m_EditorClassIdentifier: 
   itemName: "\uC5D0\uB108\uC9C0\uB4DC\uB9C1\uD06C"
-  itemDescription: "\uC0AC\uC6A9 \uC2DC \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  itemDescription: "\uC0AC\uC6A9 \uC2DC \uC18D\uB3C4\uAC00 10\uCD08 \uB3D9\uC548
+    \uC99D\uAC00\uD569\uB2C8\uB2E4."
   type: 0
   icon: {fileID: 21300000, guid: 2663ef657a15ef84c83a106fc3c9cb81, type: 3}
   dropPrefab: {fileID: 3500646242201193422, guid: dc2ba6fafcb96d04a876699ef236ec45, type: 3}
