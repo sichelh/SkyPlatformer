@@ -32,6 +32,17 @@ public class PlayerData : MonoBehaviour
         curHp = maxHp;
     }
 
+    public void Heal(int heal)
+    {
+        if (CurHp >= MaxHp)
+        {
+            Debug.Log("이미 최대체력입니다!");
+            return;
+        }
+
+        CurHp += heal;
+    }
+
     public void TakeDamage(int damage)
     {
         CurHp -= damage;
@@ -39,9 +50,35 @@ public class PlayerData : MonoBehaviour
 
         if (CurHp <= 0)
         {
-            curHp = 0;
+            CurHp = 0;
             Death();
         }
+    }
+
+    public void JumpBoost(int value)
+    {
+        StartCoroutine(JumpBoostRoutine(value));
+    }
+
+    // 30초동안만 효과 지속
+    IEnumerator JumpBoostRoutine(int boostJumpPower)
+    {
+        JumpPower += boostJumpPower;
+        yield return new WaitForSeconds(10f);
+        JumpPower -= boostJumpPower;
+    }
+    
+    public void SpeedBoost(int value)
+    {
+        StartCoroutine(SpeedBoostRoutine(value));
+    }
+
+    // 30초동안만 효과 지속
+    IEnumerator SpeedBoostRoutine(int boostSpeedPower)
+    {
+        runSpeed += boostSpeedPower;
+        yield return new WaitForSeconds(10f);
+        runSpeed -= boostSpeedPower;
     }
 
     public void Death()
