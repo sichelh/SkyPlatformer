@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Item_Steak
   m_EditorClassIdentifier: 
   itemName: "\uC2A4\uD14C\uC774\uD06C"
-  itemDescription: "\uC0AC\uC6A9 \uC2DC \uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+  itemDescription: "\uC0AC\uC6A9 \uC2DC \uCCB4\uB825\uACFC \uC2A4\uD0DC\uBBF8\uB098\uB97C
+    \uD68C\uBCF5\uD569\uB2C8\uB2E4."
   type: 0
   icon: {fileID: 21300000, guid: 62ca64e62cd1f2f49bb0852b4cb26b09, type: 3}
   dropPrefab: {fileID: 3012044455543151591, guid: be91331d5f9914549a1379ab6c3f2f5d, type: 3}
@@ -22,4 +23,8 @@ MonoBehaviour:
   consumables:
   - type: 0
     value: 10
+  - type: 1
+    value: 50
   equipPrefab: {fileID: 0}
+  equipables: []
+  isEquip: 0

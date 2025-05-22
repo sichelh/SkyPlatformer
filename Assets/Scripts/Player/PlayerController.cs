@@ -106,11 +106,17 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
-            rb.AddForce(Vector2.up * playerData.JumpPower, ForceMode.Impulse);
-            animator.SetTrigger("isJump");
-            isJump = true;
+            if (playerData.UseStamina(20))
+            {
+                rb.AddForce(Vector2.up * playerData.JumpPower, ForceMode.Impulse);
+                animator.SetTrigger("isJump");
+                isJump = true;
+            }
+            else
+            {
+                Debug.Log("스태미나 부족!");
+            }
         }
-
     }
 
     public bool IsGrounded()

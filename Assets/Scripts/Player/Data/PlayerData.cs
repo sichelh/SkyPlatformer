@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +9,8 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private float jumpPower;
     [SerializeField] private float maxHp;
     [SerializeField] private float curHp;
+    [SerializeField] private float maxStamina;
+    [SerializeField] private float curStamina;
     
     public float RunSpeed { get { return runSpeed; } set { runSpeed = value; } }
     public float JumpPower { get { return jumpPower; } set { jumpPower = value; } }
@@ -24,13 +24,30 @@ public class PlayerData : MonoBehaviour
             OnHpChanged?.Invoke();
         } 
     }
+    public float MaxStamina { get { return maxStamina; } set { maxStamina = value; } }
+    public float CurStamina
+    {
+        get { return curStamina; }
+        set
+        {
+            curStamina = Mathf.Clamp(value, 0, maxStamina);
+            OnStaminaChanged?.Invoke();
+        }
+    }
 
     public event Action OnTakeDamage;
     public event Action OnHpChanged;
+    public event Action OnStaminaChanged;
 
     private void Start()
     {
         curHp = maxHp;
+        curStamina = maxStamina;
+    }
+
+    private void Update()
+    {
+        CurStamina += 5 * Time.deltaTime;
     }
 
     public void Heal(int heal)
@@ -42,6 +59,17 @@ public class PlayerData : MonoBehaviour
         }
 
         CurHp += heal;
+    }
+
+    public void AddStamina(int addValue)
+    {
+        if (CurStamina >= MaxStamina)
+        {
+            Debug.Log("이미 최대 스태미나 입니다!");
+            return;
+        }
+
+        CurStamina += addValue;
     }
 
     public void TakeDamage(float damage)
@@ -56,9 +84,15 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public void AddJump(int value)
+    public bool UseStamina(float value)
     {
-        JumpPower += value;
+        if(CurStamina <= value)
+        {
+            return false;
+        }
+
+        CurStamina -= value;
+        return true;
     }
 
     public void JumpBoost(int value)
@@ -82,9 +116,9 @@ public class PlayerData : MonoBehaviour
     // 10초동안만 효과 지속
     IEnumerator SpeedBoostRoutine(int boostSpeedPower)
     {
-        runSpeed += boostSpeedPower;
+        RunSpeed += boostSpeedPower;
         yield return new WaitForSeconds(10f);
-        runSpeed -= boostSpeedPower;
+        RunSpeed -= boostSpeedPower;
     }
 
     // 사망 시 게임 다시 시작

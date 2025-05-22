@@ -186,14 +186,14 @@ public class InventoryUI : MonoBehaviour
 
         for (int i=0; i < selectedItemData.consumables.Length; i++)
         {
-            selectedItemStatName.text = selectedItemData.consumables[i].type.ToString() + "\n";
-            selectedItemStatValue.text = selectedItemData.consumables[i].value.ToString() + "\n";
+            selectedItemStatName.text += selectedItemData.consumables[i].type.ToString() + "\n";
+            selectedItemStatValue.text += selectedItemData.consumables[i].value.ToString() + "\n";
         }
 
         for (int i = 0; i < selectedItemData.equipables.Length; i++)
         {
-            selectedItemStatName.text = selectedItemData.equipables[i].equipStatType.ToString() + "\n";
-            selectedItemStatValue.text = selectedItemData.equipables[i].value.ToString() + "\n";
+            selectedItemStatName.text += selectedItemData.equipables[i].equipStatType.ToString() + "\n";
+            selectedItemStatValue.text += selectedItemData.equipables[i].value.ToString() + "\n";
         }
 
         useButton.SetActive(selectedItemData.type == EItemType.Consumable);
@@ -214,6 +214,9 @@ public class InventoryUI : MonoBehaviour
                 {
                     case ConsumableType.Hp:
                         playerData.Heal(selectedItemData.consumables[i].value);
+                        break;
+                    case ConsumableType.Stamina:
+                        playerData.AddStamina(selectedItemData.consumables[i].value);
                         break;
                     case ConsumableType.JumpPower:
                         playerData.JumpBoost(selectedItemData.consumables[i].value);
