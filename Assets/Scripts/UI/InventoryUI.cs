@@ -9,6 +9,7 @@ public class InventoryUI : MonoBehaviour
     private PlayerData playerData;
     private PlayerController playerController;
     private Player player;
+    private Equip playerEquip;
 
     [SerializeField] private Transform itemSlotPanel;
     [SerializeField] private Transform dropPosition;
@@ -20,15 +21,20 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI selectedItemStatValue;
     [SerializeField] private GameObject useButton;
     [SerializeField] private GameObject dropButton;
+    [SerializeField] private GameObject equipButton;
+    [SerializeField] private GameObject unEquipButton;
 
     private ItemData selectedItemData;
     int selectedItemIndex = 0;
+
+    int curEquipIndex;
 
     private void Start()
     {
         inventoryUI = this.gameObject;
         playerData = FindObjectOfType<PlayerData>();
         playerController = FindObjectOfType<PlayerController>();
+        playerEquip = FindObjectOfType<Equip>();
         playerController.inventory += Toggle; //player쪽에서 inventory 키 입력했는지 체크
 
         player = FindObjectOfType<Player>();
@@ -58,6 +64,8 @@ public class InventoryUI : MonoBehaviour
 
         useButton.SetActive(false);
         dropButton.SetActive(false);
+        equipButton.SetActive(false);
+        unEquipButton.SetActive(false);
     }
 
     // UI 켜고 끄기
@@ -190,6 +198,8 @@ public class InventoryUI : MonoBehaviour
 
         useButton.SetActive(selectedItemData.type == EItemType.Consumable);
         dropButton.SetActive(true);
+        equipButton.SetActive(selectedItemData.type == EItemType.Equipable && !itemSlots[index].equipped);
+        unEquipButton.SetActive(selectedItemData.type == EItemType.Equipable && itemSlots[index].equipped);
     }
 
     // 아이템 사용 시
@@ -237,5 +247,36 @@ public class InventoryUI : MonoBehaviour
             ClearSelectedItemWindow();
         }
         UpdateUI();
+    }
+
+    public void OnEquipButton()
+    {
+        if (itemSlots[curEquipIndex].equipped)
+        {
+            UnEquip(curEquipIndex);
+        }
+
+        itemSlots[selectedItemIndex].equipped = true;
+        curEquipIndex = selectedItemIndex;
+        playerEquip.EquipNew(selectedItemData);
+
+        SelectedItem(selectedItemIndex);
+    }
+
+    void UnEquip(int index)
+    {
+        itemSlots[index].equipped = false;
+        playerEquip.UnEquip(itemSlots[index].item);
+        UpdateUI();
+
+        if (selectedItemIndex == index)
+        {
+            SelectedItem(selectedItemIndex);
+        }
+    }
+
+    public void OnUnEquipButton()
+    {
+        UnEquip(selectedItemIndex);
     }
 }

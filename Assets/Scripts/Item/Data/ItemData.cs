@@ -57,4 +57,5 @@ public class ItemData : ScriptableObject
     [Header("Equipable")]
     public GameObject equipPrefab;
     public ItemDataEquipable[] equipables;
+    public bool isEquip;
 }

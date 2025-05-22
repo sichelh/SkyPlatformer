@@ -56,6 +56,11 @@ public class PlayerData : MonoBehaviour
         }
     }
 
+    public void AddJump(int value)
+    {
+        JumpPower += value;
+    }
+
     public void JumpBoost(int value)
     {
         StartCoroutine(JumpBoostRoutine(value));

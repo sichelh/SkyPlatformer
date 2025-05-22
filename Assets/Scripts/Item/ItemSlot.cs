@@ -15,6 +15,7 @@ public class ItemSlot : MonoBehaviour
 
     public int index;
     public int quantity;
+    public bool equipped;
 
     private void Awake()
     {
@@ -24,12 +25,22 @@ public class ItemSlot : MonoBehaviour
         outline = GetComponent<Outline>();
     }
 
+    private void OnEnable()
+    {
+        outline.enabled = equipped;
+    }
+
     // 아이템 슬롯 추가
     public void Set()
     {
         icon.gameObject.SetActive(true);
         icon.sprite = item.icon;
         quantityText.text = quantity > 1 ? quantity.ToString() : string.Empty;
+
+        if (outline != null)
+        {
+            outline.enabled = equipped;
+        }
     }
 
     // 아이템 슬롯 제거
