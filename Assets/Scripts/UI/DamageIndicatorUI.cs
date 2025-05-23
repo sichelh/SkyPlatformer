@@ -8,24 +8,23 @@ public class DamageIndicatorUI : MonoBehaviour
     private Image image;
     [SerializeField] float flashSpeed;
 
-    private PlayerData playerData;
+    private PlayerDataManager playerDataManager;
     private Coroutine coroutine;
 
     private void Awake()
     {
-        playerData = FindObjectOfType<PlayerData>();
+        playerDataManager = PlayerDataManager.Instance;
         image = this.GetComponent<Image>();
-        playerData.OnTakeDamage += Flash; // 데미지 받으면 Indicator 켜기
+        playerDataManager.OnTakeDamage += Flash; // 데미지 받으면 Indicator 켜기
     }
 
     private void OnDestroy()
     {
-        playerData.OnTakeDamage -= Flash;
+        playerDataManager.OnTakeDamage -= Flash;
     }
 
     private void Start()
     {
-        playerData.OnTakeDamage += Flash;
         image.enabled = false;
     }
 

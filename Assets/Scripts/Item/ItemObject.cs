@@ -16,7 +16,7 @@ public class ItemObject : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        player = FindObjectOfType<Player>();
+        player = GameManager.Instance.player;
     }
 
     // 아이템 감지되면 정보 출력

@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 7587090304135526369}
   - component: {fileID: 8889012823749550041}
   - component: {fileID: 1951367147929715599}
-  - component: {fileID: 5768569955441369311}
   - component: {fileID: 7357916067112340829}
   - component: {fileID: 7343350327219526552}
   m_Layer: 7
@@ -138,6 +137,7 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  jumpStamina: 20
   cameraContainer: {fileID: 5112251498707371340}
   minXLook: -45
   maxXLook: 50
@@ -252,22 +252,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5768569955441369311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5031306426913366258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9c175a3da046ef468e8a7d7c6f2f689, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  runSpeed: 5
-  jumpPower: 100
-  maxHp: 100
-  curHp: 0
 --- !u!114 &7357916067112340829
 MonoBehaviour:
   m_ObjectHideFlags: 0

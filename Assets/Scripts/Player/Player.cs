@@ -5,17 +5,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private PlayerController controller;
-    private PlayerData playerData;
-    
     public ItemData itemData;
     public Action addItem;
 
     [SerializeField] private Transform dropPosition;
 
+    public PlayerController playerController;
+    public Equip equip;
+
     private void Awake()
     {
-        controller = GetComponent<PlayerController>();
-        playerData = GetComponent<PlayerData>();
+        GameManager.Instance.player = this;
+        playerController = GetComponent<PlayerController>();
+        equip = GetComponent<Equip>();
     }
 }

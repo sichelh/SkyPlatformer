@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class Equipment : MonoBehaviour
 {
-    private PlayerData playerData;
-
-    private void Start()
-    {
-        playerData = FindObjectOfType<PlayerData>();
-    }
+    private PlayerDataManager playerDataManager;
 
     public void EquipStat(ItemData data)
     {
         if (data == null) return;
 
-        playerData = FindObjectOfType<PlayerData>();
+        if (playerDataManager == null)
+            playerDataManager = PlayerDataManager.Instance;
 
         if (data.isEquip)
         {
@@ -24,10 +20,10 @@ public class Equipment : MonoBehaviour
                 switch (data.equipables[i].equipStatType)
                 {
                     case EquipStatType.JumpPower:
-                        playerData.JumpPower += data.equipables[i].value;
+                        playerDataManager.AddStat(StatType.JumpPower, data.equipables[i].value);
                         break;
                     case EquipStatType.RunSpeed:
-                        playerData.RunSpeed += data.equipables[i].value;
+                        playerDataManager.AddStat(StatType.RunSpeed, data.equipables[i].value);
                         break;
                 }
             }
@@ -40,10 +36,10 @@ public class Equipment : MonoBehaviour
                 switch (data.equipables[i].equipStatType)
                 {
                     case EquipStatType.JumpPower:
-                        playerData.JumpPower -= data.equipables[i].value;
+                        playerDataManager.SubStat(StatType.JumpPower, data.equipables[i].value);
                         break;
                     case EquipStatType.RunSpeed:
-                        playerData.RunSpeed -= data.equipables[i].value;
+                        playerDataManager.SubStat(StatType.RunSpeed, data.equipables[i].value);
                         break;
                 }
             }

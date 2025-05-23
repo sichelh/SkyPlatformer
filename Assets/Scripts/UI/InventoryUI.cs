@@ -6,7 +6,7 @@ public class InventoryUI : MonoBehaviour
     private ItemSlot[] itemSlots;
     
     private GameObject inventoryUI;
-    private PlayerData playerData;
+    private PlayerDataManager playerDataManager;
     private PlayerController playerController;
     private Player player;
     private Equip playerEquip;
@@ -32,12 +32,14 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         inventoryUI = this.gameObject;
-        playerData = FindObjectOfType<PlayerData>();
-        playerController = FindObjectOfType<PlayerController>();
-        playerEquip = FindObjectOfType<Equip>();
+        playerDataManager = PlayerDataManager.Instance;
+
+        player = GameManager.Instance.player;
+        playerController = player.playerController;
+        playerEquip = player.equip;
+
         playerController.inventory += Toggle; //player쪽에서 inventory 키 입력했는지 체크
 
-        player = FindObjectOfType<Player>();
         player.addItem += AddItem; //player쪽에서 아이틈을 습득했는지 체크
 
         inventoryUI.SetActive(false);
@@ -74,10 +76,12 @@ public class InventoryUI : MonoBehaviour
         if (IsOpen()) // UI가 켜져있는지 확인
         {
             inventoryUI.SetActive(false);
+            GameManager.Instance.UIClosed();
         }
         else
         {
             inventoryUI.SetActive(true);
+            GameManager.Instance.UIOpened();
         }
     }
 
@@ -213,16 +217,16 @@ public class InventoryUI : MonoBehaviour
                 switch (selectedItemData.consumables[i].type)
                 {
                     case ConsumableType.Hp:
-                        playerData.Heal(selectedItemData.consumables[i].value);
+                        playerDataManager.AddStat(StatType.Hp, selectedItemData.consumables[i].value);
                         break;
                     case ConsumableType.Stamina:
-                        playerData.AddStamina(selectedItemData.consumables[i].value);
+                        playerDataManager.AddStat(StatType.Stamina, selectedItemData.consumables[i].value);
                         break;
                     case ConsumableType.JumpPower:
-                        playerData.JumpBoost(selectedItemData.consumables[i].value);
+                        playerDataManager.BoostStat(StatType.JumpPower, selectedItemData.consumables[i].value);
                         break;
                     case ConsumableType.RunSpeed:
-                        playerData.SpeedBoost(selectedItemData.consumables[i].value);
+                        playerDataManager.BoostStat(StatType.RunSpeed, selectedItemData.consumables[i].value);
                         break;
                 }
             }

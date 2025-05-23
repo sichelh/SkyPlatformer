@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] private LayerMask groundLayerMask;
+    [SerializeField] private float jumpStamina = 20f;
     private bool isJump;
 
     [Header("Look")]
@@ -25,13 +26,13 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private Animator animator;
-    private PlayerData playerData;
+    private PlayerDataManager playerDataManager;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
-        playerData = GetComponent<PlayerData>();
+        playerDataManager = PlayerDataManager.Instance;
     }
 
     private void Start()
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         // 입력 y값은 forward(앞뒤, z축), 입력 x값은 right(좌우, x축)
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= playerData.RunSpeed;
+        dir *= playerDataManager.GetCurValue(StatType.RunSpeed);
 
         // 점프할때만 y값을 변경해야 하기 때문에 값을 유지
         dir.y = rb.velocity.y;
@@ -106,9 +107,9 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
-            if (playerData.UseStamina(20))
+            if (playerDataManager.UseStamina(jumpStamina))
             {
-                rb.AddForce(Vector2.up * playerData.JumpPower, ForceMode.Impulse);
+                rb.AddForce(Vector2.up * playerDataManager.GetCurValue(StatType.JumpPower), ForceMode.Impulse);
                 animator.SetTrigger("isJump");
                 isJump = true;
             }

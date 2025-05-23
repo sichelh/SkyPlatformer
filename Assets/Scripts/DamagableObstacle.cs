@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamagableObstacle : MonoBehaviour
 {
-    private PlayerData playerData;
+    private PlayerDataManager playerDataManager;
 
     private Coroutine damageCoroutine;
 
@@ -15,7 +15,7 @@ public class DamagableObstacle : MonoBehaviour
     {
         if (other.gameObject.layer == 7)
         {
-            playerData = other.GetComponent<PlayerData>();
+            playerDataManager = PlayerDataManager.Instance;
             
             // 코루틴 중복 실행 방지
             if (damageCoroutine == null)
@@ -38,9 +38,9 @@ public class DamagableObstacle : MonoBehaviour
 
     IEnumerator DamageRoutine()
     {
-        while (playerData.CurHp > 0)
+        while (playerDataManager.GetCurValue(StatType.Hp) > 0)
         {
-            playerData.TakeDamage(damage);
+            playerDataManager.TakeDamage(damage);
             yield return new WaitForSeconds(3);
         }
     }
