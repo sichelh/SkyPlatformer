@@ -4862,6 +4862,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5213348524207383795, guid: ea6b375111f51da4a9d6f44b581f0684, type: 3}
+      propertyPath: damage
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6336865652897684507, guid: ea6b375111f51da4a9d6f44b581f0684, type: 3}
       propertyPath: m_Name
       value: DamagableObstacle
