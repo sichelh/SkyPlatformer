@@ -40,6 +40,11 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    private void Update()
+    {
+        animator.SetBool("isGrounded", IsGrounded());
+    }
+
     private void FixedUpdate()
     {
         Move();
